@@ -31,3 +31,10 @@
   top: 20%;
   padding: 0 5px;
 }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row {
+  flex-basis: 100%;
+}

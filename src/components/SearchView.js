@@ -11,7 +11,7 @@ const MovieCard = ({ movie }) => {
         <>
           <img
             src="https://images.unsplash.com/photo-1545486332-9e0999c535b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-            className="card-img-top poster-img"
+            className="card-img-top poster-img flex-card-img"
             alt={title}
           />
           <span className="poster-title">{title}</span>
@@ -24,8 +24,8 @@ const MovieCard = ({ movie }) => {
   }
 
   return (
-    <div className="col-lg-3 col-md-3 col-2 my-4">
-      <div className="card">
+    <div className="col-lg-3 col-md-3 col-12 my-4 text-center">
+      <div className="card flex-card">
         {posterLoaded(movie.poster_path, movie.original_title)}
         <div className="card-body">
           <h5 className="card-title">{movie.original_title}</h5>
@@ -49,7 +49,7 @@ export const SearchView = ({ keyword, searchResults }) => {
     <>
       <Hero text={title} />
       {resultsHtml && (
-        <div className="container">
+        <div className="container container-fluid">
           <div className="row">{resultsHtml}</div>
         </div>
       )}
