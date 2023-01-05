@@ -24,7 +24,7 @@ const MovieCard = ({ movie }) => {
   }
 
   return (
-    <div className="col-lg-3 col-md-3 col-12 my-4 text-center">
+    <div className="col-lg-3 col-md-3 col-6 my-4 text-center">
       <div className="card flex-card">
         {posterLoaded(movie.poster_path, movie.original_title)}
         <div className="card-body">
