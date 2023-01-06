@@ -1,6 +1,6 @@
 import { Hero } from "./Hero";
 import { About } from "./homeComponents/About";
-import { News } from "./homeComponents/News";
+// import { News } from "./homeComponents/News";
 
 const Home = () => {
   const homeHero =
@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <Hero text="Welcome to Movie Browser" backdrop={homeHero} />
       <About />
-      <News />
+      {/* <News /> */}
     </>
   );
 };
