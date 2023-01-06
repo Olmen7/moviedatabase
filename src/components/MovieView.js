@@ -24,7 +24,6 @@ export const MovieView = () => {
       return <Hero text="Loading..." />;
     }
     if (movieDetails) {
-      // TODO: what if there is no poster path? Make changes
       const backdropUrl = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
       function posterLoaded(poster, title) {
         if (poster === null) {
@@ -48,7 +47,6 @@ export const MovieView = () => {
           );
         }
       }
-
       return (
         <>
           <Hero text={movieDetails.original_title} backdrop={backdropUrl} />

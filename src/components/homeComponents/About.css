@@ -1,0 +1,14 @@
+.about-section {
+  margin: 15px 0;
+  padding: 20px 0;
+  background-color: rgba(19, 19, 19, 0.3);
+}
+.subtitle {
+  text-align: center;
+  font-size: 2rem;
+  padding: 0 0 15px 0;
+}
+.description {
+  text-align: center;
+  font-size: 1.3rem;
+}

@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import { About } from "./components/About";
 import { SearchView } from "./components/SearchView";
 import { useState, useEffect } from "react";
 import { MovieView } from "./components/MovieView";
+import ScrollToTop from "./ScrollToTop";
 
 // tmdi key = 3ffb1ef9412dbe911529e0af90b27623
 
@@ -30,18 +30,22 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar searchText={searchText} setSearchText={setSearchText} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/search"
-            element={
-              <SearchView keyword={searchText} searchResults={searchResults} />
-            }
-          />
-          <Route path="/movies/:id" element={<MovieView />} />
-        </Routes>
+        <ScrollToTop>
+          <Navbar searchText={searchText} setSearchText={setSearchText} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/search"
+              element={
+                <SearchView
+                  keyword={searchText}
+                  searchResults={searchResults}
+                />
+              }
+            />
+            <Route path="/movies/:id" element={<MovieView />} />
+          </Routes>
+        </ScrollToTop>
       </Router>
     </>
   );

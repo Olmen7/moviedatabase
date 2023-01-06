@@ -1,4 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
+import logo from "../assets/movieBrowserLogo.png";
 
 const Navbar = ({ searchText, setSearchText }) => {
   const navigate = useNavigate();
@@ -15,10 +16,10 @@ const Navbar = ({ searchText, setSearchText }) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Movie Browser
+          <img className="logo" src={logo} alt="Movie Browser Logo" />
         </Link>
         <button
           className="navbar-toggler"
