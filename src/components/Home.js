@@ -1,5 +1,5 @@
 import { Hero } from "./Hero";
-import { About } from "./homeComponents/About";
+// import { About } from "./homeComponents/About";
 // import { News } from "./homeComponents/News";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Hero text="Welcome to Movie Browser" backdrop={homeHero} />
-      <About />
+      {/* <About /> */}
       {/* <News /> */}
     </>
   );
