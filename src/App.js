@@ -6,6 +6,7 @@ import { SearchView } from "./components/SearchView";
 import { useState, useEffect } from "react";
 import { MovieView } from "./components/MovieView";
 import ScrollToTop from "./ScrollToTop";
+import { TrailerRenderComponent } from "./components/TrailerRenderComponent";
 
 // tmdi key = 3ffb1ef9412dbe911529e0af90b27623
 
@@ -44,6 +45,7 @@ function App() {
               }
             />
             <Route path="/movies/:id" element={<MovieView />} />
+            <Route path="/test" element={<TrailerRenderComponent />} />
           </Routes>
         </ScrollToTop>
       </Router>

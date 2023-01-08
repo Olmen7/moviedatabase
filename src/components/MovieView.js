@@ -31,11 +31,11 @@ export const MovieView = () => {
     const yt = movieDetails.videos.results;
     function officialTrailer(yt) {
       if (yt.name === "Official Trailer") {
-        return yt.name === "Official Trailer";
+        return yt.name;
       } else if (yt.name === "official trailer") {
-        return yt.name === "official trailer";
-      } else {
-        return false;
+        return yt.name;
+      } else if (yt.type === "Trailer") {
+        return yt.type;
       }
     }
 
