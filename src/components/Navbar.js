@@ -45,13 +45,14 @@ const Navbar = ({ searchText, setSearchText }) => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          <form className="search-form" role="search">
             <input
-              className="form-control me-2"
+              className="form-control me-2 searchbar"
               type="search"
-              placeholder="Search"
+              placeholder="Search..."
               aria-label="Search"
               value={searchText}
+              autoFocus
               onChange={updateSearchText}
               onKeyDown={(e) => {
                 if (e.keyCode === 13) {
@@ -66,7 +67,7 @@ const Navbar = ({ searchText, setSearchText }) => {
             ></input>
             <button
               onClick={clickHandler}
-              className="btn btn-outline-success"
+              className=" btn-outline-success search-btn"
               type="submit"
             >
               Search

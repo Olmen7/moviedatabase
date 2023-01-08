@@ -70,6 +70,24 @@ body:before {
 .provider-logo {
   width: 40px;
 }
+@media screen and (min-width: 450px) {
+  .search-form {
+    display: flex;
+    width: 50%;
+  }
+  .searchbar {
+    flex-basis: 80%;
+  }
+  .search-btn {
+    flex-basis: 20%;
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+  .search-btn:hover {
+    border: 2px solid green;
+    color: green;
+  }
+}
 @media screen and (max-width: 450px) {
   iframe {
     width: 300px;
