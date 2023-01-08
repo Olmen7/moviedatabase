@@ -70,3 +70,7 @@ body:before {
 .provider-logo {
   width: 40px;
 }
+iframe {
+  width: 300px;
+  height: fit-content;
+}

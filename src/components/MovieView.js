@@ -10,7 +10,56 @@ export const MovieView = () => {
   const [provider, setProvider] = useState([]);
 
   const movieId = movieDetails.id;
-  const providerLogo = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
+
+  const logoUrl = provider.logo_path;
+
+  function hasLogo() {
+    if (logoUrl) {
+      const providerLogo = `https://image.tmdb.org/t/p/original${logoUrl}`;
+      return (
+        <div>
+          Where to watch:{" "}
+          <img className="provider-logo" src={providerLogo} alt="..." />
+        </div>
+      );
+    } else {
+      return;
+    }
+  }
+
+  function showTrailer() {
+    const yt = movieDetails.videos.results;
+    function officialTrailer(yt) {
+      if (yt.name === "Official Trailer") {
+        return yt.name === "Official Trailer";
+      } else if (yt.name === "official trailer") {
+        return yt.name === "official trailer";
+      } else {
+        return false;
+      }
+    }
+
+    let findName = yt.find((yt) => officialTrailer(yt));
+
+    const ytKey = findName.key;
+    if (ytKey) {
+      const trailer = `https://www.youtube.com/embed/${ytKey}`;
+      return (
+        <>
+          <iframe
+            title="trailer"
+            id="ytplayer"
+            width="640"
+            height="360"
+            src={trailer}
+            frameborder="0"
+          />
+        </>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
 
   useEffect(() => {
     fetch(
@@ -39,6 +88,26 @@ export const MovieView = () => {
     }
     if (movieDetails) {
       const backdropUrl = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
+
+      //   function showTrailer() {
+      //     if (ytKey) {
+      //       return (
+      //         <>
+      //           <iframe
+      //             title="trailer"
+      //             id="ytplayer"
+      //             width="640"
+      //             height="360"
+      //             src={trailer}
+      //             frameborder="0"
+      //           />
+      //         </>
+      //       );
+      //     } else {
+      //       return;
+      //     }
+      //   }
+
       function posterLoaded(poster, title) {
         if (poster === null) {
           return (
@@ -61,19 +130,19 @@ export const MovieView = () => {
           );
         }
       }
-      const yt = movieDetails.videos.results;
-      function officialTrailer(yt) {
-        if (yt.name === "Official Trailer") {
-          return yt.name === "Official Trailer";
-        } else if (yt.name === "official trailer") {
-          return yt.name === "official trailer";
-        }
-      }
+      //   const yt = movieDetails.videos.results;
+      //   function officialTrailer(yt) {
+      //     if (yt.name === "Official Trailer") {
+      //       return yt.name === "Official Trailer";
+      //     } else if (yt.name === "official trailer") {
+      //       return yt.name === "official trailer";
+      //     }
+      //   }
 
-      let findName = yt.find((yt) => officialTrailer(yt));
+      //   let findName = yt.find((yt) => officialTrailer(yt));
 
-      const ytKey = findName.key;
-      const trailer = `https://www.youtube.com/embed/${ytKey}`;
+      //   const ytKey = findName.key;
+      //   const trailer = `https://www.youtube.com/embed/${ytKey}`;
       return (
         <>
           <Hero text={movieDetails.original_title} backdrop={backdropUrl} />
@@ -100,26 +169,20 @@ export const MovieView = () => {
                     Run Time: {movieDetails.runtime} minutes
                   </p>
                   <p className="fs2">Status: {movieDetails.status}</p>
-                  <p>
-                    Where to watch:{" "}
-                    <img
-                      className="provider-logo"
-                      src={providerLogo}
-                      alt="..."
-                    />
-                  </p>
+                  {hasLogo()}
                   <p className="fs2">
                     Release Date: {movieDetails.release_date}
                   </p>
                   <p className="lead">{movieDetails.overview}</p>
-                  <iframe
+                  {showTrailer()}
+                  {/* <iframe
                     title="trailer"
                     id="ytplayer"
                     width="640"
                     height="360"
                     src={trailer}
                     frameborder="0"
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
