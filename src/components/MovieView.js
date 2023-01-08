@@ -7,10 +7,24 @@ export const MovieView = () => {
 
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [provider, setProvider] = useState([]);
+
+  const movieId = movieDetails.id;
+  const providerLogo = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=3ffb1ef9412dbe911529e0af90b27623`
+    )
+      .then((response) => response.json())
+      .then((data) => setProvider(data.results.US.flatrate[0]));
+  }, [movieId]);
+  //   console.log(movieDetails.videos.results[0].key);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&append_to_response=videos
+                `
     )
       .then((response) => response.json())
       .then((data) => {
@@ -47,6 +61,19 @@ export const MovieView = () => {
           );
         }
       }
+      const yt = movieDetails.videos.results;
+      function officialTrailer(yt) {
+        if (yt.name === "Official Trailer") {
+          return yt.name === "Official Trailer";
+        } else if (yt.name === "official trailer") {
+          return yt.name === "official trailer";
+        }
+      }
+
+      let findName = yt.find((yt) => officialTrailer(yt));
+
+      const ytKey = findName.key;
+      const trailer = `https://www.youtube.com/embed/${ytKey}`;
       return (
         <>
           <Hero text={movieDetails.original_title} backdrop={backdropUrl} />
@@ -73,10 +100,26 @@ export const MovieView = () => {
                     Run Time: {movieDetails.runtime} minutes
                   </p>
                   <p className="fs2">Status: {movieDetails.status}</p>
+                  <p>
+                    Where to watch:{" "}
+                    <img
+                      className="provider-logo"
+                      src={providerLogo}
+                      alt="..."
+                    />
+                  </p>
                   <p className="fs2">
                     Release Date: {movieDetails.release_date}
                   </p>
                   <p className="lead">{movieDetails.overview}</p>
+                  <iframe
+                    title="trailer"
+                    id="ytplayer"
+                    width="640"
+                    height="360"
+                    src={trailer}
+                    frameborder="0"
+                  />
                 </div>
               </div>
             </div>

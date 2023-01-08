@@ -20,7 +20,7 @@ body:before {
   height: 100%;
   z-index: -10;
   background: url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?")
-    no-repeat top;
+    no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -66,4 +66,7 @@ body:before {
 }
 .navbar {
   background-color: #c3c3c3;
+}
+.provider-logo {
+  width: 40px;
 }
