@@ -7,7 +7,7 @@ const Home = () => {
     "https://images.unsplash.com/photo-1460881680858-30d872d5b530?";
   return (
     <>
-      <Hero text="Welcome to Movie Browser" backdrop={homeHero} />
+      <Hero text="Welcome to The Tribual" backdrop={homeHero} />
       <About />
       <News />
     </>

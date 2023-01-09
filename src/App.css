@@ -62,7 +62,8 @@ body:before {
   flex-basis: 100%;
 }
 .logo {
-  height: 40px;
+  height: 50px;
+  margin: 0 15px;
 }
 .navbar {
   background-color: #c3c3c3;
@@ -70,22 +71,22 @@ body:before {
 .provider-logo {
   width: 40px;
 }
+.searchbar {
+  flex-basis: 80%;
+}
+.search-btn {
+  flex-basis: 20%;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+.search-btn:hover {
+  border: 2px solid green;
+  color: green;
+}
 @media screen and (min-width: 450px) {
   .search-form {
     display: flex;
     width: 50%;
-  }
-  .searchbar {
-    flex-basis: 80%;
-  }
-  .search-btn {
-    flex-basis: 20%;
-    border-radius: 10px;
-    border: 1px solid black;
-  }
-  .search-btn:hover {
-    border: 2px solid green;
-    color: green;
   }
 }
 @media screen and (max-width: 450px) {
