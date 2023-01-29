@@ -8,10 +8,6 @@ import { MovieView } from "./components/MovieView";
 import ScrollToTop from "./ScrollToTop";
 import { TrailerRenderComponent } from "./components/TrailerRenderComponent";
 
-// tmdi key = 3ffb1ef9412dbe911529e0af90b27623
-
-// example link = https://api.themoviedb.org/3/search/movie?api_key=3ffb1ef9412dbe911529e0af90b27623&language=en-US&query=star%20wars&page=1&include_adult=false
-
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchText, setSearchText] = useState("");

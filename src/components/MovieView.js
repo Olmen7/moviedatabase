@@ -36,14 +36,16 @@ export const MovieView = () => {
         return yt.name;
       } else if (yt.type === "Trailer") {
         return yt.type;
+      } else {
+        return <div>No trailer</div>;
       }
     }
-
     let findName = yt.find((yt) => officialTrailer(yt));
 
-    const ytKey = findName.key;
-    if (ytKey) {
-      const trailer = `https://www.youtube.com/embed/${ytKey}`;
+    // const ytKey = findName.key;
+
+    if (findName && findName.hasOwnProperty("key")) {
+      const trailer = `https://www.youtube.com/embed/${findName.key}`;
       return (
         <>
           <iframe
@@ -52,7 +54,7 @@ export const MovieView = () => {
             width="640"
             height="360"
             src={trailer}
-            frameborder="0"
+            frameBorder="0"
           />
         </>
       );
@@ -60,7 +62,6 @@ export const MovieView = () => {
       return <div></div>;
     }
   }
-
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=3ffb1ef9412dbe911529e0af90b27623`
@@ -72,8 +73,7 @@ export const MovieView = () => {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&append_to_response=videos
-                `
+      `https://api.themoviedb.org/3/movie/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&append_to_response=videos`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -88,25 +88,6 @@ export const MovieView = () => {
     }
     if (movieDetails) {
       const backdropUrl = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
-
-      //   function showTrailer() {
-      //     if (ytKey) {
-      //       return (
-      //         <>
-      //           <iframe
-      //             title="trailer"
-      //             id="ytplayer"
-      //             width="640"
-      //             height="360"
-      //             src={trailer}
-      //             frameborder="0"
-      //           />
-      //         </>
-      //       );
-      //     } else {
-      //       return;
-      //     }
-      //   }
 
       function posterLoaded(poster, title) {
         if (poster === null) {
@@ -130,19 +111,6 @@ export const MovieView = () => {
           );
         }
       }
-      //   const yt = movieDetails.videos.results;
-      //   function officialTrailer(yt) {
-      //     if (yt.name === "Official Trailer") {
-      //       return yt.name === "Official Trailer";
-      //     } else if (yt.name === "official trailer") {
-      //       return yt.name === "official trailer";
-      //     }
-      //   }
-
-      //   let findName = yt.find((yt) => officialTrailer(yt));
-
-      //   const ytKey = findName.key;
-      //   const trailer = `https://www.youtube.com/embed/${ytKey}`;
       return (
         <>
           <Hero text={movieDetails.original_title} backdrop={backdropUrl} />
