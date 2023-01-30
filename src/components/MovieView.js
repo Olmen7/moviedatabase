@@ -44,7 +44,7 @@ export const MovieView = () => {
 
     // const ytKey = findName.key;
 
-    if (findName && findName.hasOwnProperty("key")) {
+    if (findName && Object.values(findName).includes("YouTube")) {
       const trailer = `https://www.youtube.com/embed/${findName.key}`;
       return (
         <>
