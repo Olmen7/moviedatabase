@@ -24,7 +24,6 @@ export const SearchBar = ({ searchText, setSearchText }) => {
           placeholder="Search for movie here..."
           aria-label="Search"
           value={searchText}
-          autoFocus
           onChange={updateSearchText}
           onKeyDown={(e) => {
             if (e.keyCode === 13) {

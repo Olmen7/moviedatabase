@@ -71,6 +71,9 @@ body:before {
 .provider-logo {
   width: 40px;
 }
+.search-form {
+  display: flex;
+}
 .searchbar {
   flex-basis: 80%;
 }
@@ -83,12 +86,7 @@ body:before {
   border: 2px solid green;
   color: green;
 }
-@media screen and (min-width: 450px) {
-  .search-form {
-    display: flex;
-    width: 50%;
-  }
-}
+
 @media screen and (max-width: 450px) {
   iframe {
     width: 300px;
