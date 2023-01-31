@@ -1,20 +1,7 @@
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/movieBrowserLogo.png";
 
-const Navbar = ({ searchText, setSearchText }) => {
-  const navigate = useNavigate();
-  const updateSearchText = (e) => {
-    navigate("/search");
-    setSearchText(e.target.value);
-  };
-  const clickHandler = (e) => {
-    e.preventDefault();
-    updateSearchText();
-  };
-  function deleteText(e) {
-    e.target.value = "";
-  }
-
+const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
@@ -39,40 +26,7 @@ const Navbar = ({ searchText, setSearchText }) => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
-            </li>
           </ul>
-          <form className="search-form" role="search">
-            <input
-              className="form-control me-2 searchbar"
-              type="search"
-              placeholder="Search..."
-              aria-label="Search"
-              value={searchText}
-              autoFocus
-              onChange={updateSearchText}
-              onKeyDown={(e) => {
-                if (e.keyCode === 13) {
-                  e.preventDefault();
-                }
-              }}
-              onKeyUp={(e) => {
-                if (e.keyCode === 13) {
-                  deleteText(e);
-                }
-              }}
-            ></input>
-            <button
-              onClick={clickHandler}
-              className=" btn-outline-success search-btn"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
         </div>
       </div>
     </nav>

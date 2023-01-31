@@ -6,7 +6,7 @@ import { SearchView } from "./components/SearchView";
 import { useState, useEffect } from "react";
 import { MovieView } from "./components/MovieView";
 import ScrollToTop from "./ScrollToTop";
-import { TrailerRenderComponent } from "./components/TrailerRenderComponent";
+import { SearchBar } from "./components/SearchBar";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -29,6 +29,7 @@ function App() {
       <Router>
         <ScrollToTop>
           <Navbar searchText={searchText} setSearchText={setSearchText} />
+          <SearchBar searchText={searchText} setSearchText={setSearchText} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -41,7 +42,7 @@ function App() {
               }
             />
             <Route path="/movies/:id" element={<MovieView />} />
-            <Route path="/test" element={<TrailerRenderComponent />} />
+            <Route path="/test" element={<SearchBar />} />
           </Routes>
         </ScrollToTop>
       </Router>

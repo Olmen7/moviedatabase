@@ -132,14 +132,25 @@ export const MovieView = () => {
                 </div>
                 <div className="col-md-9 text-white">
                   <h2>{movieDetails.original_title}</h2>
-                  <p className="fs-4">Rating: {movieDetails.vote_average}/10</p>
+                  <p className="fs-4">
+                    Rating:{" "}
+                    {movieDetails.vote_average > 0
+                      ? `${movieDetails.vote_average}/10`
+                      : "Unknown"}
+                  </p>
                   <p className="fs-3">
-                    Run Time: {movieDetails.runtime} minutes
+                    Run Time:{" "}
+                    {movieDetails.runtime > 0
+                      ? `${movieDetails.runtime} minutes`
+                      : "To be determined"}
                   </p>
                   <p className="fs2">Status: {movieDetails.status}</p>
                   {hasLogo()}
                   <p className="fs2">
-                    Release Date: {movieDetails.release_date}
+                    Release Date:{" "}
+                    {movieDetails.release_date
+                      ? movieDetails.release_date
+                      : "To be determined"}
                   </p>
                   <p className="lead">{movieDetails.overview}</p>
                   {showTrailer()}

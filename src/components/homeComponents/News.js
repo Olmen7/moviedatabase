@@ -47,7 +47,9 @@ export const News = () => {
                   <h5 className="card-title">
                     {info.name || info.original_title}
                   </h5>
-                  <p className="vote">&#9733; {info.vote_average}/10</p>
+                  <p className="vote">
+                    {info.vote_average > 0 ? ` ${info.vote_average}/10` : ""}
+                  </p>
                   <p>{info.video}</p>
                   <Link to={detailUrl} className="btn btn-primary">
                     Details
