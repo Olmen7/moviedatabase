@@ -44,9 +44,7 @@ export const News = () => {
               <div className="card-wrapper">
                 {posterLoaded(info.poster_path, info.original_title)}
                 <div className="card-body bg-dark">
-                  <h5 className="card-title">
-                    {info.name || info.original_title}
-                  </h5>
+                  <h5 className="card-title">{info.name || info.title}</h5>
                   <p className="vote">
                     {info.vote_average > 0 ? ` ${info.vote_average}/10` : ""}
                   </p>

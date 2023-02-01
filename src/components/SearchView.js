@@ -4,6 +4,7 @@ import { Hero } from "./Hero";
 
 const MovieCard = ({ movie }) => {
   const detailUrl = `/movies/${movie.id}`;
+  const tvUrl = `/tv/${movie.id}`;
 
   function posterLoaded(poster, title) {
     if (poster === null) {
@@ -22,14 +23,16 @@ const MovieCard = ({ movie }) => {
       return <img src={posterUrl} className="card-img-top" alt={title} />;
     }
   }
-
   return (
     <div className="col-lg-3 col-md-3 col-6 my-4 text-center">
       <div className="card flex-card bg-dark">
         {posterLoaded(movie.poster_path, movie.original_title)}
         <div className="card-body">
           <h5 className="card-title">{movie.original_title}</h5>
-          <Link to={detailUrl} className="btn btn-primary">
+          <Link
+            to={movie.first_air_date ? tvUrl : detailUrl}
+            className="btn btn-primary"
+          >
             Show details
           </Link>
         </div>

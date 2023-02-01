@@ -2,14 +2,14 @@ import { Hero } from "./Hero";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export const MovieView = () => {
+export const TvView = () => {
   const { id } = useParams();
 
-  const [movieDetails, setMovieDetails] = useState({});
+  const [tvDetails, setTvDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [provider, setProvider] = useState([]);
 
-  const movieId = movieDetails.id;
+  const movieId = tvDetails.id;
 
   const logoUrl = provider.logo_path;
 
@@ -28,21 +28,11 @@ export const MovieView = () => {
   }
 
   function showTrailer() {
-    const yt = movieDetails.videos.results;
-    function officialTrailer(yt) {
-      if (yt.name === "Official Trailer") {
-        return yt.name;
-      } else if (yt.name === "official trailer") {
-        return yt.name;
-      } else if (yt.type === "Trailer") {
-        return yt.type;
-      } else {
-        return <div>No trailer</div>;
-      }
-    }
-    let findName = yt.find((yt) => officialTrailer(yt));
+    const yt = tvDetails.videos.results;
 
-    if (findName && Object.values(findName).includes("YouTube")) {
+    let findName = yt.find((yt) => yt.official);
+
+    if (findName && Object.values(findName).includes(true)) {
       const trailer = `https://www.youtube.com/embed/${findName.key}`;
       return (
         <>
@@ -62,31 +52,30 @@ export const MovieView = () => {
   }
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=3ffb1ef9412dbe911529e0af90b27623`
+      `https://api.themoviedb.org/3/tv/${movieId}/watch/providers?api_key=3ffb1ef9412dbe911529e0af90b27623`
     )
       .then((response) => response.json())
-      .then((data) => setProvider(data.results.US.flatrate[0]))
-      .catch(console.log(""));
+      .then((data) => setProvider(data.results.US.flatrate[0]));
   }, [movieId]);
+  //   console.log(tvDetails.videos.results[0].key);
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&append_to_response=videos`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=3ffb1ef9412dbe911529e0af90b27623&append_to_response=videos`
     )
       .then((response) => response.json())
       .then((data) => {
-        setMovieDetails(data);
+        setTvDetails(data);
         setIsLoading(false);
-      })
-      .catch(console.log(""));
+      });
   }, [id]);
 
-  function renderMovieDetails() {
+  function rendertvDetails() {
     if (isLoading) {
       return <Hero text="Loading..." />;
     }
-    if (movieDetails) {
-      const backdropUrl = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
+    if (tvDetails) {
+      const backdropUrl = `https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`;
 
       function posterLoaded(poster, title) {
         if (poster === null) {
@@ -100,7 +89,7 @@ export const MovieView = () => {
             </>
           );
         } else {
-          const posterPath = `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`;
+          const posterPath = `https://image.tmdb.org/t/p/w500${tvDetails.poster_path}`;
           return (
             <img
               src={posterPath}
@@ -112,7 +101,7 @@ export const MovieView = () => {
       }
       return (
         <>
-          <Hero text={movieDetails.title} backdrop={backdropUrl} />
+          <Hero text={tvDetails.name} backdrop={backdropUrl} />
           <div
             style={{
               background: `linear-gradient(to right, rgba(0,0,0,.8),rgba(0,0,0,.7)),url(${backdropUrl})`,
@@ -124,31 +113,34 @@ export const MovieView = () => {
             <div className="container my-4">
               <div className="row">
                 <div className="col-md-3">
-                  {posterLoaded(movieDetails.poster_path, movieDetails.title)}
+                  {posterLoaded(
+                    tvDetails.poster_path,
+                    tvDetails.original_title
+                  )}
                 </div>
                 <div className="col-md-9 text-white">
-                  <h2>{movieDetails.title}</h2>
+                  <h2>{tvDetails.original_title}</h2>
                   <p className="fs-4">
                     Rating:{" "}
-                    {movieDetails.vote_average > 0
-                      ? `${movieDetails.vote_average}/10`
+                    {tvDetails.vote_average > 0
+                      ? `${tvDetails.vote_average}/10`
                       : "Unknown"}
                   </p>
                   <p className="fs-3">
-                    Run Time:{" "}
-                    {movieDetails.runtime > 0
-                      ? `${movieDetails.runtime} minutes`
+                    Episode Run Time:{" "}
+                    {tvDetails.episode_run_time > 0
+                      ? `${tvDetails.episode_run_time} minutes`
                       : "To be determined"}
                   </p>
-                  <p className="fs2">Status: {movieDetails.status}</p>
+                  <p className="fs2">Status: {tvDetails.status}</p>
                   {hasLogo()}
                   <p className="fs2">
-                    Release Date:{" "}
-                    {movieDetails.release_date
-                      ? movieDetails.release_date
+                    First Air Date:{" "}
+                    {tvDetails.first_air_date
+                      ? tvDetails.first_air_date
                       : "To be determined"}
                   </p>
-                  <p className="lead">{movieDetails.overview}</p>
+                  <p className="lead">{tvDetails.overview}</p>
                   {showTrailer()}
                 </div>
               </div>
@@ -159,5 +151,5 @@ export const MovieView = () => {
     }
   }
 
-  return renderMovieDetails();
+  return rendertvDetails();
 };
