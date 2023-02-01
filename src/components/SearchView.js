@@ -26,9 +26,11 @@ const MovieCard = ({ movie }) => {
   return (
     <div className="col-lg-3 col-md-3 col-6 my-4 text-center">
       <div className="card flex-card bg-dark">
-        {posterLoaded(movie.poster_path, movie.original_title)}
+        {posterLoaded(movie.poster_path, movie.title)}
         <div className="card-body">
-          <h5 className="card-title">{movie.original_title}</h5>
+          <h5 className="card-title">
+            {movie.original_title ? movie.title : movie.name}
+          </h5>
           <Link
             to={movie.first_air_date ? tvUrl : detailUrl}
             className="btn btn-primary"
